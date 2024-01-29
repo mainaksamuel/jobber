@@ -1,5 +1,5 @@
-import { defineConfig } from "drizzle-kit";
-export default defineConfig({
+import { Config } from "drizzle-kit";
+export default {
   schema: "./src/db/schema.ts",
   out: "./src/db/migrations",
   driver: "pg",
@@ -8,4 +8,4 @@ export default defineConfig({
   },
   verbose: true,
   strict: true,
-});
+} satisfies Config;

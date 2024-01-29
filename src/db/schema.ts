@@ -8,38 +8,42 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 
-export const jobberSchema = pgSchema("jobber");
+/* schema approach does not seem to work for vercel with drizzle
+ * table creation and changes are not being pushed to vercel postgres
+ */
+// export const jobberSchema = pgSchema("jobber");
+// export const jobs = jobberSchema.table("jobber_jobs", {
+// id: serial("id").primaryKey(),
+// slug: text("slug").notNull().unique(),
+// title: text("title").notNull(),
+// jobType: text("job_type").notNull(),
+// locationType: text("location_type"),
+// location: text("location").default(""),
+// description: text("description").default(""),
+// salary: integer("salary"),
+// companyName: text("company_name"),
+// applicationEmail: text("application_email").default(""),
+// applicaionUrl: text("application_url").default(""),
+// companyLogoUrl: text("company_logo_url").default(""),
+// approved: boolean("approved").default(false),
+// createdAt: timestamp("created_at").defaultNow().notNull(),
+// updatedAt: timestamp("updated_at").defaultNow().notNull(),
+// });
 
-export const jobs = jobberSchema.table("jobber-jobs", {
+export const jobs = pgTable("jobber_jobs", {
   id: serial("id").primaryKey(),
   slug: text("slug").notNull().unique(),
   title: text("title").notNull(),
-  type: text("type").notNull(),
-  locationType: text("locationType"),
+  jobType: text("job_type").notNull(),
+  locationType: text("location_type"),
   location: text("location").default(""),
   description: text("description").default(""),
   salary: integer("salary"),
-  companyName: text("companyName"),
-  applicationEmail: text("applicationEmail").default(""),
-  applicaionUrl: text("applicationUrl").default(""),
-  companyLogoUrl: text("companyLogoUrl").default(""),
+  companyName: text("company_name"),
+  applicationEmail: text("application_email").default(""),
+  applicaionUrl: text("application_url").default(""),
+  companyLogoUrl: text("company_logo_url").default(""),
   approved: boolean("approved").default(false),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
-
-// export const jobs = pgTable("jobber-jobs", {
-//   id: serial("id").primaryKey(),
-//   slug: text("slug").notNull().unique(),
-//   title: text("title").notNull(),
-//   type: text("type").notNull(),
-//   locationType: text("locationType"),
-//   location: text("location").default(""),
-//   description: text("description").default(""),
-//   salary: integer("salary"),
-//   companyName: text("companyName"),
-//   applicationEmail: text("applicationEmail").default(""),
-//   applicaionUrl: text("applicationUrl").default(""),
-//   companyLogoUrl: text("companyLogoUrl").default(""),
-//   approved: boolean("approved").default(false),
-// });
